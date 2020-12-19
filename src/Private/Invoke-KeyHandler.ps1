@@ -31,7 +31,7 @@ $ThreadJob = {
         $tooltipData = $null;
 
         if ($command -eq "kubernetes") {
-            $tooltipData = .$Context.Providers.Kubernetes $state
+            $tooltipData = .$Context.Providers.Kubernetes $Context
         }
         elseif ($command -eq "azure") {
             $tooltipData = .$Context.Providers.Azure $Context

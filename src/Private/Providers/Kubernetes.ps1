@@ -1,14 +1,11 @@
 [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
 $ProviderKubernetes = {
-    param($state)
+    param($Context)
 
-    $tooltip = kubectl config current-context
-    $tooltip = [char]0xfd31 + " " + $tooltip
-    $foregroundColor = [System.ConsoleColor]::Magenta
-    $backgroundColor = [System.ConsoleColor]::Black
     $result = [TooltipDto]::new()
-    $result.Text = $tooltip
-    $result.ForegroundColor = $foregroundColor
-    $result.BackgroundColor = $backgroundColor
+    $result.Text = kubectl config current-context
+    $result.Text = [char]0xfd31 + " " + $result.Text
+    $result.ForegroundColor = [System.ConsoleColor]::Magenta
+    $result.BackgroundColor = [System.ConsoleColor]::Black
     return $result
 }
