@@ -13,5 +13,11 @@ Foreach ($import in @($Public + $Private)) {
     }
 }
 
-Write-Log "------------------------"
-Write-Log "Initializing"
+.$WriteLog "------------------------"
+.$WriteLog "Initializing"
+
+[System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
+$CommandList = Get-CommandList
+
+Remove-PSReadlineKeyHandler -Key SpaceBar
+Set-PSReadlineKeyHandler -Key SpaceBar -ScriptBlock { Invoke-KeyHandler }
