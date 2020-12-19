@@ -22,6 +22,7 @@ $Context = @{
     ShowTooltip = $ShowTooltip
     Providers = @{
         Kubernetes = $ProviderKubernetes
+        Azure = $ProviderAzure
     }
 }
 
