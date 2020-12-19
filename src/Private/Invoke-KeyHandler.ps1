@@ -3,7 +3,7 @@ function Invoke-KeyHandler() {
         $line = $null
         $cursor = $null
         [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
-        .$WriteLog "line: '$line'"
+        .$Context.WriteLog "line: '$line'"
     
         # insert the space that was swallowed by the KeyHandler
         [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
@@ -12,36 +12,38 @@ function Invoke-KeyHandler() {
         if ($null -eq $command) {
             return
         }
-        .$WriteLog "command: $command"
+        .$Context.WriteLog "command: $command"
     
         Start-ThreadJob -Name "MagicTooltips-KeyHandler" -StreamingHost $Host `
             -ScriptBlock $ThreadJob `
-            -ArgumentList ($command, $WriteLog, $ShowTooltip, [ToolTipDto])
+            -ArgumentList ($command, $Context, [ToolTipDto])
     }
     catch {
-        .$WriteLog "[Invoke-KeyHandler] ERROR: $_"
-        .$WriteLog $_.ScriptStackTrace
+        .$Context.WriteLog "[Invoke-KeyHandler] ERROR: $_"
+        .$Context.WriteLog $_.ScriptStackTrace
     }
 }
 
 $ThreadJob = {
-    param($command, $WriteLog, $ShowTooltip, $tooltipDtoType)
+    param($command, $Context, $tooltipDtoType)
 
     try {
         $tooltipData = $null;
 
-        # placeholder until providers are created
-        $tooltipData = $tooltipDtoType::new()
-        $tooltipData.Text = "test"
-        $tooltipData.ForegroundColor = [System.ConsoleColor]::White
-        $tooltipData.BackgroundColor = [System.ConsoleColor]::Red
         
+        if ($command -eq "kubernetes") {
+            $tooltipData = .$Context.Providers.Kubernetes $state
+        }
+        else {
+            .$Context.WriteLog "Unknown command: '$command'"
+        }
+
         if ($null -ne $tooltipData) {
-            .$ShowTooltip $tooltipData.Text $tooltipData.ForegroundColor $tooltipData.BackgroundColor
+            .$Context.ShowTooltip $tooltipData.Text $tooltipData.ForegroundColor $tooltipData.BackgroundColor
         }
     }
     catch {
-        .$WriteLog "[ThreadJobSb] ERROR: $_"
-        .$WriteLog $_.ScriptStackTrace
+        .$Context.WriteLog "[ThreadJobSb] ERROR: $_"
+        .$Context.WriteLog $_.ScriptStackTrace
     }
 }

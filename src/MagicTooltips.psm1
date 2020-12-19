@@ -17,6 +17,15 @@ Foreach ($import in @($Public + $Private)) {
 .$WriteLog "Initializing"
 
 [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
+$Context = @{
+    WriteLog = $WriteLog
+    ShowTooltip = $ShowTooltip
+    Providers = @{
+        Kubernetes = $ProviderKubernetes
+    }
+}
+
+[System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
 $CommandList = Get-CommandList
 
 Remove-PSReadlineKeyHandler -Key SpaceBar
