@@ -12,3 +12,6 @@ Foreach ($import in @($Public + $Private)) {
         Write-Error -Message "Failed to import function $($import.fullname): $_"
     }
 }
+
+Write-Log "------------------------"
+Write-Log "Initializing"
