@@ -1,4 +1,3 @@
-
 #Get public and private function definition files.
 $Public = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorAction SilentlyContinue )
 $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
@@ -18,16 +17,22 @@ Foreach ($import in @($Public + $Private)) {
 
 [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
 $Context = @{
-    WriteLog = $WriteLog
+    WriteLog    = $WriteLog
     ShowTooltip = $ShowTooltip
-    Providers = @{
+    Providers   = @{
         Kubernetes = $ProviderKubernetes
-        Azure = $ProviderAzure
+        Azure      = $ProviderAzure
     }
 }
 
 [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
 $CommandList = Get-CommandList
 
-Remove-PSReadlineKeyHandler -Key SpaceBar
-Set-PSReadlineKeyHandler -Key SpaceBar -ScriptBlock { Invoke-KeyHandler }
+function Register-MagicTooltips {
+    .$WriteLog "Registering"
+    Remove-PSReadlineKeyHandler -Key SpaceBar
+    Set-PSReadlineKeyHandler -Key SpaceBar -ScriptBlock { Invoke-KeyHandler }
+}
+
+Export-ModuleMember Register-MagicTooltips
+Register-MagicTooltips

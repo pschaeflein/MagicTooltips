@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-# RootModule = ''
+RootModule = 'MagicTooltips.psm1'
 
 # Version number of this module.
 ModuleVersion = '0.0.1'
@@ -33,7 +33,7 @@ Copyright = '(c) TravisTX. All rights reserved.'
 Description = 'Show contextual information about the command as you''re entering it'
 
 # Minimum version of the PowerShell engine required by this module
-PowerShellVersion = '3.0'
+PowerShellVersion = '7.0'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
@@ -69,7 +69,7 @@ FormatsToProcess = @()
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @()
+FunctionsToExport = 'Register-MagicTooltips'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
