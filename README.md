@@ -35,7 +35,7 @@ $global:MagicTooltips_AzureCommands = "az,terraform,pulumi,terragrunt"
 
 ## PowerShell Profile
 
-The path to your PowerShell profile is stored in the variable `$powershell`. The following commands will launch a text editor with your profile:
+The path to your PowerShell profile is stored by PowerShell in the variable `$profile`. The following commands will launch a text editor with your profile:
 
 Visual Studio Code
 ```pwsh
