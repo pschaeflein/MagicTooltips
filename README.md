@@ -46,8 +46,23 @@ Notepad
 ```pwsh
 notepad $profile
 ```
----
+
 Once you have made changes to your profile, you can reload your profile in PowerShell:
 ```pwsh
 .$profile
 ```
+
+## Roadmap
+- More Providers
+    - AWS
+    - Gcloud
+- Customization
+    - Colors
+    - Templates
+    - Placement
+- Caching for performance improvements
+
+## Acknowledgments
+- [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- [oh-my-posh3](https://github.com/JanDeDobbeleer/oh-my-posh3)
+- [Nerd Fonts](https://www.nerdfonts.com/)
