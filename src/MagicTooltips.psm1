@@ -3,17 +3,14 @@ $Public = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorActio
 $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
 
 #Dot source the files
-Foreach ($import in @($Public + $Private)) {
-    Try {
+foreach ($import in @($Public + $Private)) {
+    try {
         . $import.fullname
     }
-    Catch {
+    catch {
         Write-Error -Message "Failed to import function $($import.fullname): $_"
     }
 }
-
-.$WriteLog "------------------------"
-.$WriteLog "Initializing"
 
 [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
 $Context = @{
@@ -23,7 +20,11 @@ $Context = @{
         Kubernetes = $ProviderKubernetes
         Azure      = $ProviderAzure
     }
+    Configuration = Get-Configuration
 }
+
+.$WriteLog "------------------------"
+.$WriteLog "Initializing"
 
 [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
 $CommandList = Get-CommandList

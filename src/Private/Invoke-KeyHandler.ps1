@@ -4,16 +4,16 @@ function Invoke-KeyHandler() {
         $cursor = $null
         [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
         .$Context.WriteLog "line: '$line'"
-    
+
         # insert the space that was swallowed by the KeyHandler
         [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
-    
+
         $command = $CommandList[$line]
         if ($null -eq $command) {
             return
         }
         .$Context.WriteLog "command: $command"
-    
+
         Start-ThreadJob -Name "MagicTooltips-KeyHandler" -StreamingHost $Host `
             -ScriptBlock $ThreadJob `
             -ArgumentList ($command, $Context, [ToolTipDto])
@@ -25,22 +25,36 @@ function Invoke-KeyHandler() {
 }
 
 $ThreadJob = {
-    param($command, $Context, $tooltipDtoType)
+    param($provider, $Context, $tooltipDtoType)
+    function Set-Overrides($provider, $tooltipData) {
+        $fgColor = $Context.Configuration.Providers[$provider].FgColor
+        if ($null -ne $fgColor) {
+            $tooltipData.ForegroundColor = $fgColor
+        }
+
+        $bgColor = $Context.Configuration.Providers[$provider].BgColor
+        if ($null -ne $bgColor) {
+            $tooltipData.BackgroundColor = $bgColor
+        }
+    }
 
     try {
-        $tooltipData = $null;
+        $tooltipData = $null
 
-        if ($command -eq "kubernetes") {
-            $tooltipData = .$Context.Providers.Kubernetes $Context
-        }
-        elseif ($command -eq "azure") {
-            $tooltipData = .$Context.Providers.Azure $Context
-        }
-        else {
-            .$Context.WriteLog "Unknown command: '$command'"
+        switch ($provider) {
+            "kubernetes" {
+                $tooltipData = .$Context.Providers.Kubernetes $Context
+            }
+            "azure" {
+                $tooltipData = .$Context.Providers.Azure $Context
+            }
+            default {
+                .$Context.WriteLog "Unknown provider: '$provider'"
+            }
         }
 
         if ($null -ne $tooltipData) {
+            Set-Overrides $provider $tooltipData
             .$Context.ShowTooltip $tooltipData.Text $tooltipData.ForegroundColor $tooltipData.BackgroundColor
         }
     }

@@ -5,7 +5,7 @@ $ProviderAzure = {
     $result = [TooltipDto]::new()
     $result.Text = az account show --query name --output tsv
     $result.Text = [char]0xfd03 + " " + $result.Text
-    $result.ForegroundColor = [System.ConsoleColor]::DarkCyan
-    $result.BackgroundColor = [System.ConsoleColor]::Black
+    $result.ForegroundColor = "#3A96DD"
+    $result.BackgroundColor = "#000000"
     return $result
 }

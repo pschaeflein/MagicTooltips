@@ -5,7 +5,9 @@ $WriteLog = {
         [string]$Message
     )
 
-    # TODO: check environment variable
+    if ($Context.Configuration.Debug -ne "true") {
+        return
+    }
 
     $path = "$($PSScriptRoot)\..\magictooltips.log"
     $FormattedDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"

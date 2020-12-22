@@ -9,8 +9,8 @@ Pairs nicely with custom prompts, such as [oh-my-posh3](https://github.com/JanDe
 
 
 Supported Providers:
-- Kubernetes
-- Azure
+- Kubernetes - Shows the current kubernetes context
+- Azure - Shows the name of the current azure subscription
 - (more to come)
 
 ## Installation
@@ -24,12 +24,12 @@ Import-Module MagicTooltips
 
 To make the module auto-load, add the Import-Module line to your [PowerShell profile](#powershell-profile).
 
-## Configuraion
+## Configuration
 
 Configuration is done by setting global variables in your [PowerShell profile](#powershell-profile).
 
 ### Commands
-To customize when different tooltips are shown, edit the command variables with a comma separted list of commands
+To configure when different tooltips are shown, edit the command variables with a comma separted list of commands
 ```pwsh
 # Kubernetes
 $global:MagicTooltips_KubernetesCommands = "kubectl,helm,kubens,kubectx,oc,istioctl,kogito,k9s,helmlist"
@@ -38,6 +38,26 @@ $global:MagicTooltips_KubernetesCommands = "kubectl,helm,kubens,kubectx,oc,istio
 $global:MagicTooltips_AzureCommands = "az,terraform,pulumi,terragrunt"
 
 ```
+
+### Colors
+To configure the colors, use hex colors in the following variables
+```pwsh
+$global:MagicTooltips_KubernetesFgColor="#AE5FD6"
+$global:MagicTooltips_KubernetesBgColor="#000000"
+$global:MagicTooltips_AzureFgColor="#3A96DD"
+$global:MagicTooltips_AzureBgColor="#000000"
+```
+
+### Debug
+To enable debug logs, set the following variable.
+```pwsh
+$global:MagicTooltips_Debug="true"
+```
+ The log file is called `magictooltips.log` and is written to the module directory, which can be found using
+```pwsh
+(Get-Module MagicTooltips).ModuleBase
+```
+
 
 ## PowerShell Profile
 
