@@ -28,9 +28,11 @@ function Get-Configuration() {
     Add-ProviderConfiguration "kubernetes" "Commands"
     Add-ProviderConfiguration "kubernetes" "FgColor"
     Add-ProviderConfiguration "kubernetes" "BgColor"
+    Add-ProviderConfiguration "kubernetes" "Template"
 
     Add-ProviderConfiguration "azure" "Commands"
     Add-ProviderConfiguration "azure" "FgColor"
     Add-ProviderConfiguration "azure" "BgColor"
+    Add-ProviderConfiguration "azure" "Template"
     return $configuration
 }

@@ -1,5 +1,6 @@
 class TooltipDto {
-    [string]$Text
+    [string]$Value
+    [string]$Template
     [string]$ForegroundColor
     [string]$BackgroundColor
 }

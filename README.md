@@ -13,6 +13,11 @@ Supported Providers:
 - Azure - Shows the name of the current azure subscription
 - (more to come)
 
+## Prerequisites
+- Powershell 7+
+- CLI tools installed and in your path for one or more of the supported providers
+- (optional) A [Nerd Font](https://www.nerdfonts.com/) installed and selected as your terminal's font
+
 ## Installation
 
 You can install and import Magic Tooltips from the PowerShell Gallery:
@@ -43,6 +48,17 @@ $global:MagicTooltips_KubernetesBgColor="#000000"
 $global:MagicTooltips_AzureFgColor="#3A96DD"
 $global:MagicTooltips_AzureBgColor="#000000"
 ```
+
+### Templates
+MagicTooltips can be drawn with a simple template language, provided by the following variables:
+```pwsh
+$global:MagicTooltips_KubernetesTemplate = "`u{fd31} {value}"
+$global:MagicTooltips_AzureTemplate = "`u{fd03} {value}"
+```
+
+The string you provide here will be printed to the host. The string `{value}` will be replaced with the value returned by the provider (kubernetes cluster name, for example).
+
+If you would like to use icons, make sure you have a [Nerd Font](https://www.nerdfonts.com/) selected as your terminal's font. Write icons using the syntax `` `u{fd03}`` where `fd03` is the hex code for the unicode character you wish to print. You can find these hex codes on the [Nerd Font Cheat Sheet](https://www.nerdfonts.com/cheat-sheet).
 
 ### Placement
 To configure placement, set the following variables
@@ -91,10 +107,6 @@ Once you have made changes to your profile, you can reload your profile in Power
 - More Providers
     - AWS
     - Gcloud
-- Customization
-    - Colors
-    - Templates
-    - Placement
 - Caching for performance improvements
 
 ## Acknowledgments

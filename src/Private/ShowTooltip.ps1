@@ -2,13 +2,12 @@
 $ShowTooltip = {
     param
     (
-        [string]$tooltip,
-        [string]$foregroundColor,
-        [string]$backgroundColor
+        $tooltip
     )
-    $fgRgb = Convert-HexToRgb($foregroundColor)
-    $bgRgb = Convert-HexToRgb($backgroundColor)
-    $coloredTooltip = "`e[38;2;${fgRgb}m`e[48;2;${bgRgb}m$tooltip`e[0m"
+    $fgRgb = Convert-HexToRgb($tooltip.ForegroundColor)
+    $bgRgb = Convert-HexToRgb($tooltip.BackgroundColor)
+    $tooltipText = $tooltip.Template.Replace("{value}", $tooltip.Value)
+    $coloredTooltip = "`e[38;2;${fgRgb}m`e[48;2;${bgRgb}m$tooltipText`e[0m"
 
     $saveX = [console]::CursorLeft
     $saveY = [console]::CursorTop
@@ -20,7 +19,7 @@ $ShowTooltip = {
             $drawX = $Context.Configuration.HorizontalOffset
         }
         default {
-            $drawX = [Console]::WindowWidth - $tooltip.Length - $Context.Configuration.HorizontalOffset
+            $drawX = [Console]::WindowWidth - $tooltipText.Length - $Context.Configuration.HorizontalOffset
         }
     }
 

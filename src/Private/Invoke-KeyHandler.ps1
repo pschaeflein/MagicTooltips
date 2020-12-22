@@ -36,6 +36,11 @@ $ThreadJob = {
         if ($null -ne $bgColor) {
             $tooltipData.BackgroundColor = $bgColor
         }
+
+        $template = $Context.Configuration.Providers[$provider].Template
+        if ($null -ne $template) {
+            $tooltipData.Template = $template
+        }
     }
 
     try {
@@ -55,7 +60,7 @@ $ThreadJob = {
 
         if ($null -ne $tooltipData) {
             Set-Overrides $provider $tooltipData
-            .$Context.ShowTooltip $tooltipData.Text $tooltipData.ForegroundColor $tooltipData.BackgroundColor
+            .$Context.ShowTooltip $tooltipData
         }
     }
     catch {
