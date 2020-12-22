@@ -12,10 +12,23 @@ $ShowTooltip = {
 
     $saveX = [console]::CursorLeft
     $saveY = [console]::CursorTop
+    $drawX = $saveX
+    $drawY = $saveY
 
-    $drawX = [Console]::WindowWidth - $tooltip.Length - 1
+    switch($Context.Configuration.HorizontalAlignment) {
+        "left" {
+            $drawX = $Context.Configuration.HorizontalOffset
+        }
+        default {
+            $drawX = [Console]::WindowWidth - $tooltip.Length - $Context.Configuration.HorizontalOffset
+        }
+    }
+
+    $drawY += $Context.Configuration.VerticalOffset
+
     [console]::CursorVisible = $false
-    [console]::setcursorposition($drawX, $saveY)
+    [console]::setcursorposition($drawX, $drawY)
+
     Write-Host -NoNewline $coloredTooltip
     [console]::setcursorposition($saveX, $saveY)
     [console]::CursorVisible = $true

@@ -20,7 +20,10 @@ function Get-Configuration() {
         }
     }
 
-    Add-Configuration "debug"
+    Add-Configuration "Debug"
+    Add-Configuration "HorizontalAlignment"
+    Add-Configuration "HorizontalOffset"
+    Add-Configuration "VerticalOffset"
 
     Add-ProviderConfiguration "kubernetes" "Commands"
     Add-ProviderConfiguration "kubernetes" "FgColor"

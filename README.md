@@ -31,12 +31,8 @@ Configuration is done by setting global variables in your [PowerShell profile](#
 ### Commands
 To configure when different tooltips are shown, edit the command variables with a comma separted list of commands
 ```pwsh
-# Kubernetes
 $global:MagicTooltips_KubernetesCommands = "kubectl,helm,kubens,kubectx,oc,istioctl,kogito,k9s,helmlist"
-
-# Azure
 $global:MagicTooltips_AzureCommands = "az,terraform,pulumi,terragrunt"
-
 ```
 
 ### Colors
@@ -47,6 +43,19 @@ $global:MagicTooltips_KubernetesBgColor="#000000"
 $global:MagicTooltips_AzureFgColor="#3A96DD"
 $global:MagicTooltips_AzureBgColor="#000000"
 ```
+
+### Placement
+To configure placement, set the following variables
+```pwsh
+$global:MagicTooltips_HorizontalAlignment = "right"
+$global:MagicTooltips_HorizontalOffset = 0
+$global:MagicTooltips_VerticalOffset = -1
+```
+
+- `HorizontalAlignment` default "right". Possible values are "left" or "right"
+- `HorizontalOffset` default 0. specify the number of columns to offset from the left or right edge of the terminal
+- `VerticalOffset` default 0. specify the number of rows to offset from the cursor position. Negative values will cause printing 
+to appear above the cursor row, while positive values will print below the cursor row.
 
 ### Debug
 To enable debug logs, set the following variable.
