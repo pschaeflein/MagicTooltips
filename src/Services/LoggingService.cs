@@ -7,7 +7,10 @@ namespace MagicTooltips.Services
     {
         public static void WriteLog(string message)
         {
-            // todo, opt in via config
+            if (!SettingsService.Settings.Debug)
+            {
+                return;
+            }
 
             var path = "magictooltips.log";
             var formattedDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");

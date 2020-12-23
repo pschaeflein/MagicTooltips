@@ -8,6 +8,7 @@ namespace MagicTooltips
     {
         protected override void ProcessRecord()
         {
+            SettingsService.Populate(SessionState);
             LoggingService.WriteLog("------------------------");
             LoggingService.WriteLog("Initializing");
 
