@@ -1,4 +1,5 @@
-﻿using System.Management.Automation;
+﻿using MagicTooltips.Services;
+using System.Management.Automation;
 
 namespace MagicTooltips
 {
@@ -7,6 +8,9 @@ namespace MagicTooltips
     {
         protected override void ProcessRecord()
         {
+            LoggingService.WriteLog("------------------------");
+            LoggingService.WriteLog("Initializing");
+
             PowerShell.Create().AddCommand("Remove-PSReadlineKeyHandler")
                    .AddParameter("Key", "SpaceBar")
                    .Invoke();
