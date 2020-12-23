@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "PowerShell Core": {
+      "commandName": "Executable",
+      "executablePath": "pwsh",
+      "commandLineArgs": "-NoExit -Command \"Import-Module .\\MagicTooltips.dll; Register-MagicTooltips\""
+    },
+    "Windows PowerShell": {
+      "commandName": "Executable",
+      "executablePath": "powershell",
+      "commandLineArgs": "-NoExit -Command \"Import-Module .\\MagicTooltips.dll; Register-MagicTooltips\""
+    }
+  }
+}
