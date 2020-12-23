@@ -12,6 +12,8 @@ namespace MagicTooltips
             LoggingService.WriteLog("------------------------");
             LoggingService.WriteLog("Initializing");
 
+            CommandService.PopulateCommands();
+
             PowerShell.Create().AddCommand("Remove-PSReadlineKeyHandler")
                    .AddParameter("Key", "SpaceBar")
                    .Invoke();
@@ -19,8 +21,10 @@ namespace MagicTooltips
             PowerShell.Create().AddCommand("Set-PSReadlineKeyHandler")
                    .AddParameter("Key", "SpaceBar")
                    .AddParameter("ScriptBlock", ScriptBlock.Create(@"
-                        [Microsoft.PowerShell.PSConsoleReadLine]::Insert(' '); 
-                        Invoke-MagicTooltips;
+                        [Microsoft.PowerShell.PSConsoleReadLine]::Insert(' ')
+                        $line = $cursor = $null
+                        [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+                        Invoke-MagicTooltips $line
                     "))
                    .Invoke();
         }
