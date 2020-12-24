@@ -26,17 +26,10 @@ namespace MagicTooltips
 
             Task.Run(() =>
             {
+                var initialY = Console.CursorTop;
                 var provider = ProviderFactory.GetProvider(providerKey);
                 var val = provider.GetValue();
-
-                var tooltip = $"Process MagicTooltips! {val}";
-                var saveX = Console.CursorLeft;
-                var saveY = Console.CursorTop;
-                var drawX = Console.WindowWidth - tooltip.Length;
-                var drawY = saveY;
-                Console.SetCursorPosition(drawX, drawY);
-                Host.UI.Write(tooltip);
-                Console.SetCursorPosition(saveX, saveY);
+                ShowTooltipService.ShowTooltip(providerKey, val, Host, initialY);
             });
         }
     }

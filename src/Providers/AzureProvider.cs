@@ -7,7 +7,7 @@ namespace MagicTooltips.Providers
         public string DefaultCommands => "az,terraform,pulumi,terragrunt";
         public string DefaultFgColor => "#3A96DD";
         public string DefaultBgColor => "#000000";
-        public string DefaultTemplate => "`u{fd03} {value}";
+        public string DefaultTemplate => "\ufd03 {value}";
 
         public string GetValue()
         {

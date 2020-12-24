@@ -7,7 +7,7 @@ namespace MagicTooltips.Providers
         public string DefaultCommands => "kubectl,helm,kubens,kubectx,oc,istioctl,kogito,k9s,helmlist";
         public string DefaultFgColor => "#AE5FD6";
         public string DefaultBgColor => "#000000";
-        public string DefaultTemplate => "`u{fd31} {value}";
+        public string DefaultTemplate => "\ufd31 {value}";
 
         public string GetValue()
         {
