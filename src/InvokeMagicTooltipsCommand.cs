@@ -21,12 +21,15 @@ namespace MagicTooltips
                 return;
             }
 
-            var command = CommandService.CommandList[Line];
-            LoggingService.WriteLog($"command: {command}");
+            var providerKey = CommandService.CommandList[Line];
+            LoggingService.WriteLog($"providerKey: {providerKey}");
 
             Task.Run(() =>
             {
-                var tooltip = "Process MagicTooltips!";
+                var provider = ProviderFactory.GetProvider(providerKey);
+                var val = provider.GetValue();
+
+                var tooltip = $"Process MagicTooltips! {val}";
                 var saveX = Console.CursorLeft;
                 var saveY = Console.CursorTop;
                 var drawX = Console.WindowWidth - tooltip.Length;

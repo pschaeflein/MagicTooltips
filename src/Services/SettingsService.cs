@@ -1,4 +1,5 @@
 ﻿using MagicTooltips.Dtos;
+using MagicTooltips.Providers;
 using System;
 using System.Collections;
 using System.Management.Automation;
@@ -7,10 +8,12 @@ namespace MagicTooltips.Services
 {
     public static class SettingsService
     {
+        public static SessionState SessionState { get; private set; }
         public static SettingsDto Settings { get; private set; }
 
         public static void Populate(SessionState sessionState)
         {
+            SessionState = sessionState;
             Settings = new SettingsDto();
             var settingsObj = sessionState.PSVariable.GetValue("MagicTooltipsSettings");
             if (!(settingsObj is Hashtable))
@@ -39,17 +42,18 @@ namespace MagicTooltips.Services
 
             var providerSettingsHash = (Hashtable)providerSettingsObj;
 
-            var providerSettings = (Hashtable)providerSettingsHash[ProviderKeys.Kubernetes];
-            Settings.Providers[ProviderKeys.Kubernetes].Commands = GetSetting(providerSettings, "Commands", "kubectl,helm,kubens,kubectx,oc,istioctl,kogito,k9s,helmlist");
-            Settings.Providers[ProviderKeys.Kubernetes].FgColor = GetSetting(providerSettings, "FgColor", "#AE5FD6");
-            Settings.Providers[ProviderKeys.Kubernetes].BgColor = GetSetting(providerSettings, "BgColor", "#000000");
-            Settings.Providers[ProviderKeys.Kubernetes].Template = GetSetting(providerSettings, "Template", "`u{fd31} {value}");
+            PopulateProviderSettings(ProviderKeys.Kubernetes, providerSettingsHash);
+            PopulateProviderSettings(ProviderKeys.Azure, providerSettingsHash);
+        }
 
-            providerSettings = (Hashtable)providerSettingsHash[ProviderKeys.Azure];
-            Settings.Providers[ProviderKeys.Azure].Commands = GetSetting(providerSettings, "Commands", "az,terraform,pulumi,terragrunt");
-            Settings.Providers[ProviderKeys.Azure].FgColor = GetSetting(providerSettings, "FgColor", "#3A96DD");
-            Settings.Providers[ProviderKeys.Azure].BgColor = GetSetting(providerSettings, "BgColor", "#000000");
-            Settings.Providers[ProviderKeys.Azure].Template = GetSetting(providerSettings, "Template", "`u{fd03} {value}");
+        private static void PopulateProviderSettings(string providerKey, Hashtable providerSettingsHash)
+        {
+            var provider = ProviderFactory.GetProvider(providerKey);
+            var providerSettings = (Hashtable)providerSettingsHash[providerKey];
+            Settings.Providers[providerKey].Commands = GetSetting(providerSettings, "Commands", provider.DefaultCommands);
+            Settings.Providers[providerKey].FgColor = GetSetting(providerSettings, "FgColor", provider.DefaultFgColor);
+            Settings.Providers[providerKey].BgColor = GetSetting(providerSettings, "BgColor", provider.DefaultBgColor);
+            Settings.Providers[providerKey].Template = GetSetting(providerSettings, "Template", provider.DefaultTemplate);
         }
 
         internal static T GetSetting<T>(Hashtable settings, string settingKey, T defaultValue)
@@ -99,9 +103,7 @@ namespace MagicTooltips.Services
             }
             catch
             {
-                // todo: write to host?
                 throw new NotImplementedException($"Something went wrong parsing the value: '{value}' as '{targetType}'");
-                //return defaultValue;
             }
         }
     }
