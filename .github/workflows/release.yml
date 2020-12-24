@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301
+
       - name: Publish Module to PowerShell Gallery
         env:
           PS_GALLERY_KEY: ${{secrets.PS_GALLERY_KEY}}

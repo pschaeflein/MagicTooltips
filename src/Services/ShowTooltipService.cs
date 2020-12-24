@@ -7,6 +7,7 @@ namespace MagicTooltips.Services
     public class ShowTooltipService
     {
         private const char esc = '\u001B';
+
         public static void ShowTooltip(string providerKey, string value, PSHost host, int initialY)
         {
             var providerConfiguraiton = SettingsService.Settings.Providers[providerKey];
