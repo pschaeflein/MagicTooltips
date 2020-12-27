@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace MagicTooltips.Services
 {
-    public class ShowTooltipService
+    public class RenderService
     {
         public static void ShowTooltip(string providerKey, string value, PSHost host, int initialY)
         {

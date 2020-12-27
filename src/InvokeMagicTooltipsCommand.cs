@@ -29,7 +29,7 @@ namespace MagicTooltips
                 var initialY = Console.CursorTop;
                 var provider = ProviderFactory.GetProvider(providerKey);
                 var val = provider.GetValue();
-                ShowTooltipService.ShowTooltip(providerKey, val, Host, initialY);
+                RenderService.ShowTooltip(providerKey, val, Host, initialY);
             });
         }
     }
