@@ -18,7 +18,7 @@ namespace MagicTooltips.Services
             var settingsObj = sessionState.PSVariable.GetValue("MagicTooltipsSettings");
             if (!(settingsObj is Hashtable))
             {
-                return;
+                settingsObj = new Hashtable();
             }
 
             var settingsHash = (Hashtable)settingsObj;
@@ -35,9 +35,9 @@ namespace MagicTooltips.Services
 
             var providerSettingsObj = settingsHash["Providers"];
 
-            if (providerSettingsObj == null || !(providerSettingsObj is Hashtable))
+            if (!(providerSettingsObj is Hashtable))
             {
-                return;
+                providerSettingsObj = new Hashtable();
             }
 
             var providerSettingsHash = (Hashtable)providerSettingsObj;
