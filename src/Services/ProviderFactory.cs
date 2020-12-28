@@ -13,6 +13,8 @@ namespace MagicTooltips.Services
                     return new KubernetesProvider();
                 case "azure":
                     return new AzureProvider();
+                case "aws":
+                    return new AwsProvider();
                 default:
                     throw new NotImplementedException($"Unexpected providerKey: `{providerKey}`");
             }

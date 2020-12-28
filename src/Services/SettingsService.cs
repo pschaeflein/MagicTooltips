@@ -44,6 +44,7 @@ namespace MagicTooltips.Services
 
             PopulateProviderSettings(ProviderKeys.Kubernetes, providerSettingsHash);
             PopulateProviderSettings(ProviderKeys.Azure, providerSettingsHash);
+            PopulateProviderSettings(ProviderKeys.Aws, providerSettingsHash);
         }
 
         private static void PopulateProviderSettings(string providerKey, Hashtable providerSettingsHash)

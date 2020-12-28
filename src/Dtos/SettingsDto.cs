@@ -15,6 +15,7 @@ namespace MagicTooltips.Dtos
             Providers = new Dictionary<string, ProviderSettingsDto>();
             Providers.Add(ProviderKeys.Kubernetes, new ProviderSettingsDto());
             Providers.Add(ProviderKeys.Azure, new ProviderSettingsDto());
+            Providers.Add(ProviderKeys.Aws, new ProviderSettingsDto());
         }
     }
 
