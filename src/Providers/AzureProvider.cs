@@ -14,14 +14,23 @@ namespace MagicTooltips.Providers
 
         private static string fileHash = null;
         private static string azureAccount = null;
+        private static string azProfilePath = null;
 
         public string GetValue()
         {
             string currentFileHash = null;
             try
             {
-                var azureFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".azure/azureProfile.json");
-                currentFileHash = CalculateMd5(azureFilePath);
+                if (string.IsNullOrWhiteSpace(azProfilePath))
+                {
+                    var azConfigDir = Environment.GetEnvironmentVariable("AZURE_CONFIG_DIR");
+                    if (string.IsNullOrWhiteSpace(azConfigDir))
+                    {
+                        azConfigDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".azure");
+                    }
+                    azProfilePath = Path.Combine(azConfigDir, "azureProfile.json");
+                }
+                currentFileHash = CalculateMd5(azProfilePath);
             }
             catch(Exception ex)
             {
@@ -30,7 +39,7 @@ namespace MagicTooltips.Providers
 
             if (currentFileHash != fileHash)
             {
-                // file has changed
+                LoggingService.WriteLog("azureProfile.json has changed, clearing cache");
                 fileHash = currentFileHash;
                 azureAccount = null;
             }
@@ -38,7 +47,15 @@ namespace MagicTooltips.Providers
             if (string.IsNullOrWhiteSpace(azureAccount))
             {
                 var script = "az account show --query name --output tsv";
-                azureAccount = SettingsService.SessionState.InvokeCommand.InvokeScript(script)[0].ToString();
+                var scriptResult = SettingsService.SessionState.InvokeCommand.InvokeScript(script);
+                if (scriptResult.Count > 0)
+                {
+                    azureAccount = scriptResult[0].ToString();
+                }
+                else
+                {
+                    azureAccount = "";
+                }
             }
 
             return azureAccount;
