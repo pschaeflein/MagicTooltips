@@ -42,9 +42,10 @@ namespace MagicTooltips.Services
 
             var providerSettingsHash = (Hashtable)providerSettingsObj;
 
-            PopulateProviderSettings(ProviderKeys.Kubernetes, providerSettingsHash);
-            PopulateProviderSettings(ProviderKeys.Azure, providerSettingsHash);
-            PopulateProviderSettings(ProviderKeys.Aws, providerSettingsHash);
+            foreach (var provider in Settings.Providers)
+            {
+                PopulateProviderSettings(provider.Key, providerSettingsHash);
+            }
         }
 
         private static void PopulateProviderSettings(string providerKey, Hashtable providerSettingsHash)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MagicTooltips.Services;
+using System.Collections.Generic;
 
 namespace MagicTooltips.Dtos
 {
@@ -13,9 +14,11 @@ namespace MagicTooltips.Dtos
         public SettingsDto()
         {
             Providers = new Dictionary<string, ProviderSettingsDto>();
-            Providers.Add(ProviderKeys.Kubernetes, new ProviderSettingsDto());
-            Providers.Add(ProviderKeys.Azure, new ProviderSettingsDto());
-            Providers.Add(ProviderKeys.Aws, new ProviderSettingsDto());
+            var allProviders = ProviderFactory.GetAllProviders();
+            foreach (var provider in allProviders)
+            {
+                Providers.Add(provider.Key, new ProviderSettingsDto());
+            }
         }
     }
 
