@@ -122,7 +122,6 @@ Once you have made changes to your profile, you can reload your profile in Power
 - More Providers
     - AWS
     - Gcloud
-- Caching for performance improvements
 
 ---
 ## Acknowledgments
