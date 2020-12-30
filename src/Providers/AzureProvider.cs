@@ -7,6 +7,7 @@ namespace MagicTooltips.Providers
 {
     public class AzureProvider : IProvider
     {
+        public string ProviderKey => "azure";
         public string DefaultCommands => "az,terraform,pulumi,terragrunt";
         public string DefaultFgColor => "#3A96DD";
         public string DefaultBgColor => "";

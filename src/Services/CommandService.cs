@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using MagicTooltips.Providers;
+using System.Collections.Generic;
 
 namespace MagicTooltips.Services
 {
     public class CommandService
     {
-        public static Dictionary<string, string> CommandList = new Dictionary<string, string>();
+        public static Dictionary<string, List<IProvider>> CommandList = new Dictionary<string, List<IProvider>>();
 
         public static void PopulateCommands()
         {
@@ -24,13 +25,15 @@ namespace MagicTooltips.Services
             }
         }
 
-        private static void AddCommand(string command, string provider)
+        private static void AddCommand(string command, string providerKey)
         {
-            LoggingService.WriteLog($"  {command} -> {provider}");
+            LoggingService.WriteLog($"  {command} -> {providerKey}");
             if (!CommandList.ContainsKey(command))
             {
-                CommandList.Add(command, provider);
+                CommandList.Add(command, new List<IProvider>());
             }
+            var provider = ProviderFactory.GetProvider(providerKey);
+            CommandList[command].Add(provider);
         }
     }
 }

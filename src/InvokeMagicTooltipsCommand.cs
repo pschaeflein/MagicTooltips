@@ -1,5 +1,6 @@
 ﻿using MagicTooltips.Services;
 using System;
+using System.Linq;
 using System.Management.Automation;
 using System.Threading.Tasks;
 
@@ -21,15 +22,20 @@ namespace MagicTooltips
                 return;
             }
 
-            var providerKey = CommandService.CommandList[Line];
-            LoggingService.WriteLog($"providerKey: {providerKey}");
+            var providers = CommandService.CommandList[Line];
+            var providerKeys = string.Join(", ", providers.Select(x => x.ProviderKey));
+            LoggingService.WriteLog($"providerKey: {providerKeys}");
 
             Task.Run(() =>
             {
                 var initialY = Console.CursorTop;
-                var provider = ProviderFactory.GetProvider(providerKey);
-                var val = provider.GetValue();
-                RenderService.ShowTooltip(providerKey, val, Host, initialY);
+                var horizontalOffset = SettingsService.Settings.HorizontalOffset;
+
+                foreach (var provider in providers)
+                {
+                    var val = provider.GetValue();
+                    horizontalOffset = RenderService.ShowTooltip(provider.ProviderKey, val, Host, initialY, horizontalOffset);
+                }
             });
         }
     }

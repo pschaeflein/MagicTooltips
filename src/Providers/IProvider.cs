@@ -2,10 +2,11 @@
 {
     public interface IProvider
     {
-        string GetValue();
+        string ProviderKey { get; }
         string DefaultCommands { get; }
         string DefaultFgColor { get; }
         string DefaultBgColor { get; }
         string DefaultTemplate { get; }
+        string GetValue();
     }
 }

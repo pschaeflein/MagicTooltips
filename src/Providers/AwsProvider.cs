@@ -5,6 +5,7 @@ namespace MagicTooltips.Providers
 {
     public class AwsProvider : IProvider
     {
+        public string ProviderKey => "aws";
         public string DefaultCommands => "aws,awless,terraform,pulumi,terragrunt";
         public string DefaultFgColor => "#EC7211";
         public string DefaultBgColor => "";

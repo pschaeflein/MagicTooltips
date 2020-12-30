@@ -8,6 +8,7 @@ namespace MagicTooltips.Services
     class ProviderFactory
     {
         private static Dictionary<string, IProvider> AllProviders = null;
+
         public static IProvider GetProvider(string providerKey)
         {
 

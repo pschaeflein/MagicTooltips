@@ -7,7 +7,7 @@ namespace MagicTooltips.Services
 {
     public class RenderService
     {
-        public static void ShowTooltip(string providerKey, string value, PSHost host, int initialY)
+        public static int ShowTooltip(string providerKey, string value, PSHost host, int initialY, int horizontalOffset)
         {
             var providerConfiguraiton = SettingsService.Settings.Providers[providerKey];
             var template = Regex.Unescape(providerConfiguraiton.Template);
@@ -19,11 +19,11 @@ namespace MagicTooltips.Services
             switch (SettingsService.Settings.HorizontalAlignment)
             {
                 case HorizontalAlignmentEnum.Left:
-                    drawX = SettingsService.Settings.HorizontalOffset;
+                    drawX = horizontalOffset;
                     break;
                 case HorizontalAlignmentEnum.Right:
                 default:
-                    drawX = Console.WindowWidth - tooltipText.Length - SettingsService.Settings.HorizontalOffset;
+                    drawX = Console.WindowWidth - tooltipText.Length - horizontalOffset;
                     break;
             }
 
@@ -35,6 +35,8 @@ namespace MagicTooltips.Services
             Console.SetCursorPosition(drawX, drawY);
             host.UI.Write(coloredTooltip);
             Console.SetCursorPosition(saveX, saveY);
+
+            return horizontalOffset + tooltipText.Length + 1;
         }
 
         internal static string GetColoredString(string text, string fgColor, string bgColor)
