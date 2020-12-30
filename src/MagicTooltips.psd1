@@ -95,7 +95,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @("Kubernetes", "Kubectl", "Azure", "ShowOnCommand", "Show-On-Command", "Cloud")
+        Tags = @("Kubernetes", "Kubectl", "Azure", "Aws", "Terraform", "ShowOnCommand", "Show-On-Command", "Cloud")
 
         # A URL to the license for this module.
         # LicenseUri = ''

@@ -11,6 +11,7 @@ Pairs nicely with custom prompts, such as [oh-my-posh3](https://github.com/JanDe
 Supported Providers:
 - Kubernetes - Shows the current kubernetes context
 - Azure - Shows the name of the current azure subscription
+- AWS - Shows the name of the selected AWS Profile (the AWS_Profile environment variable)
 - (more to come)
 
 ---
@@ -18,6 +19,7 @@ Supported Providers:
 - Powershell 7+
 - CLI tools installed and in your path for one or more of the supported providers
 - (optional) A [Nerd Font](https://www.nerdfonts.com/) installed and selected as your terminal's font
+  - Recommended Font: "MesloLGM Nerd Font"
 
 ---
 ## Installation
@@ -47,14 +49,20 @@ $global:MagicTooltipsSettings = @{
         Kubernetes = @{
             Commands = "kubectl,helm,kubens,kubectx,oc,istioctl,kogito,k9s,helmfile"
             FgColor = "#AE5FD6"
-            BgColor = "#000000"
+            BgColor = ""
             Template = "\ufd31 {value}"
         }
         Azure = @{
             Commands = "az,terraform,pulumi,terragrunt"
             FgColor = "#3A96DD"
-            BgColor = "#000000"
+            BgColor = ""
             Template = "\ufd03 {value}"
+        }
+        Aws = @{
+            Commands = "aws,awless,terraform,pulumi,terragrunt"
+            FgColor = "#EC7211"
+            BgColor = ""
+            Template = "\uf270 {value}"
         }
     }
 }
@@ -120,7 +128,6 @@ Once you have made changes to your profile, you can reload your profile in Power
 ---
 ## Roadmap
 - More Providers
-    - AWS
     - Gcloud
 
 ---
