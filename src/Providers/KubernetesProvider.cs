@@ -13,7 +13,7 @@ namespace MagicTooltips.Providers
         public string GetValue()
         {
             var script = "kubectl config current-context";
-            return SettingsService.SessionState.InvokeCommand.InvokeScript(script)[0].ToString();
+            return PowershellInvoker.InvokeScript(script);
         }
     }
 }

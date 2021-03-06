@@ -33,7 +33,7 @@ namespace MagicTooltips.Providers
                 }
                 currentFileHash = CalculateMd5(azProfilePath);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LoggingService.WriteLog(ex.ToString());
             }
@@ -48,15 +48,8 @@ namespace MagicTooltips.Providers
             if (string.IsNullOrWhiteSpace(azureAccount))
             {
                 var script = "az account show --query name --output tsv";
-                var scriptResult = SettingsService.SessionState.InvokeCommand.InvokeScript(script);
-                if (scriptResult.Count > 0)
-                {
-                    azureAccount = scriptResult[0].ToString();
-                }
-                else
-                {
-                    azureAccount = "";
-                }
+
+                azureAccount = PowershellInvoker.InvokeScript(script);
             }
 
             return azureAccount;
@@ -73,6 +66,5 @@ namespace MagicTooltips.Providers
                 }
             }
         }
-
     }
 }
