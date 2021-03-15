@@ -4,8 +4,8 @@ A PowerShell module to display contextual information about the command you're c
 
 ![Magic Tooltips Demo](/media/demo.gif)
 
-Pairs nicely with custom prompts, such as [oh-my-posh3](https://github.com/JanDeDobbeleer/oh-my-posh3)!
-![Magic Tooltips with oh-my-posh3](/media/oh-my-posh3.png)
+Pairs nicely with custom prompts, such as [oh-my-posh](https://github.com/JanDeDobbeleer/oh-my-posh)!
+![Magic Tooltips with oh-my-posh3](/media/oh-my-posh.png)
 
 
 Supported Providers:
