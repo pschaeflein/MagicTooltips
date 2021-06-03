@@ -29,6 +29,7 @@ namespace MagicTooltips.Services
                     { ProviderKeys.Kubernetes, new KubernetesProvider() },
                     { ProviderKeys.Azure, new AzureProvider() },
                     { ProviderKeys.Aws, new AwsProvider() },
+                    { ProviderKeys.M365, new M365Provider() }
                 };
             }
             return AllProviders;
