@@ -49,7 +49,7 @@ namespace MagicTooltips.Providers
         m365Account = PowershellInvoker.InvokeScript(script);
       }
 
-      return m365Account;
+      return m365Account.Trim('"');
     }
 
     private static string CalculateMd5(string filePath)
