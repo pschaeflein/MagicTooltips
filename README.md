@@ -12,6 +12,7 @@ Supported Providers:
 - Kubernetes - Shows the current kubernetes context
 - Azure - Shows the name of the current azure subscription
 - AWS - Shows the name of the selected AWS Profile (the AWS_Profile environment variable)
+- M365 - Shows the name of the logged-in account for the CLI for Microsoft 365
 - (more to come)
 
 ---
@@ -63,6 +64,12 @@ $global:MagicTooltipsSettings = @{
             FgColor = "#EC7211"
             BgColor = ""
             Template = "\uf270 {value}"
+        }
+        M365 = @{
+            Commands = "m365"
+            FgColor  = "#EF5350"
+            BgColor  = ""
+            Template = "\uf8c5 {value}"
         }
     }
 }
