@@ -1,12 +1,12 @@
 ﻿namespace MagicTooltips.Providers
 {
-    public interface IProvider
-    {
-        string ProviderKey { get; }
-        string DefaultCommands { get; }
-        string DefaultFgColor { get; }
-        string DefaultBgColor { get; }
-        string DefaultTemplate { get; }
-        string GetValue();
-    }
+  public interface IProvider
+  {
+    string ProviderKey { get; }
+    string DefaultCommands { get; }
+    string DefaultFgColor { get; }
+    string DefaultBgColor { get; }
+    string DefaultTemplate { get; }
+    string GetValue();
+  }
 }

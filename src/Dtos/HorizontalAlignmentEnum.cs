@@ -1,8 +1,8 @@
 ﻿namespace MagicTooltips.Dtos
 {
-    public enum HorizontalAlignmentEnum
-    {
-        Left,
-        Right
-    }
+  public enum HorizontalAlignmentEnum
+  {
+    Left,
+    Right
+  }
 }

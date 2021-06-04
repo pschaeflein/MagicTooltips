@@ -1,10 +1,10 @@
 ﻿namespace MagicTooltips.Dtos
 {
-    public class ProviderKeys
-    {
-        public static string Kubernetes = "kubernetes";
-        public static string Azure = "azure";
-        public static string Aws = "aws";
-        public static string M365 = "m365";
-    }
+  public class ProviderKeys
+  {
+    public static string Kubernetes = "kubernetes";
+    public static string Azure = "azure";
+    public static string Aws = "aws";
+    public static string M365 = "m365";
+  }
 }

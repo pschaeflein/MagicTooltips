@@ -1,14 +1,12 @@
 ﻿using MagicTooltips.Services;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace MagicTooltips.Providers
 {
-	public class M365Provider: IProvider
-	{
+  public class M365Provider : IProvider
+  {
     public string ProviderKey => "m365";
     public string DefaultCommands => "m365";
     public string DefaultFgColor => "#EF5350";

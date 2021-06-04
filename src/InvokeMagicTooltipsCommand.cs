@@ -6,37 +6,37 @@ using System.Threading.Tasks;
 
 namespace MagicTooltips
 {
-    [Cmdlet(VerbsLifecycle.Invoke, "MagicTooltips")]
-    public class InvokeMagicTooltipsCommand : PSCmdlet
+  [Cmdlet(VerbsLifecycle.Invoke, "MagicTooltips")]
+  public class InvokeMagicTooltipsCommand : PSCmdlet
+  {
+    [Parameter(Position = 0, Mandatory = true)]
+    public string Line { get; set; }
+
+    protected override void ProcessRecord()
     {
-        [Parameter(Position = 0, Mandatory = true)]
-        public string Line { get; set; }
+      Line = Line.TrimEnd(' ');
+      LoggingService.WriteLog($"line: '{Line}'");
 
-        protected override void ProcessRecord()
+      if (!CommandService.CommandList.ContainsKey(Line))
+      {
+        return;
+      }
+
+      var providers = CommandService.CommandList[Line];
+      var providerKeys = string.Join(", ", providers.Select(x => x.ProviderKey));
+      LoggingService.WriteLog($"providerKey: {providerKeys}");
+
+      Task.Run(() =>
+      {
+        var initialY = Console.CursorTop;
+        var horizontalOffset = SettingsService.Settings.HorizontalOffset;
+
+        foreach (var provider in providers)
         {
-            Line = Line.TrimEnd(' ');
-            LoggingService.WriteLog($"line: '{Line}'");
-
-            if (!CommandService.CommandList.ContainsKey(Line))
-            {
-                return;
-            }
-
-            var providers = CommandService.CommandList[Line];
-            var providerKeys = string.Join(", ", providers.Select(x => x.ProviderKey));
-            LoggingService.WriteLog($"providerKey: {providerKeys}");
-
-            Task.Run(() =>
-            {
-                var initialY = Console.CursorTop;
-                var horizontalOffset = SettingsService.Settings.HorizontalOffset;
-
-                foreach (var provider in providers)
-                {
-                    var val = provider.GetValue();
-                    horizontalOffset = RenderService.ShowTooltip(provider.ProviderKey, val, Host, initialY, horizontalOffset);
-                }
-            });
+          var val = provider.GetValue();
+          horizontalOffset = RenderService.ShowTooltip(provider.ProviderKey, val, Host, initialY, horizontalOffset);
         }
+      });
     }
+  }
 }
