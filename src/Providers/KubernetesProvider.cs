@@ -12,7 +12,7 @@ namespace MagicTooltips.Providers
 
         public string GetValue()
         {
-            var script = "kubectl config current-context";
+            var script = "kubectl config view --minify --output 'jsonpath={...context.cluster}::{..namespace}'";
             return PowershellInvoker.InvokeScript(script);
         }
     }
