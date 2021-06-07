@@ -21,16 +21,16 @@ ModuleVersion = '0.0.1'
 GUID = 'f88a0f6c-34aa-4b9e-b3f2-c965e1b13879'
 
 # Author of this module
-Author = 'TravisTX'
+Author = 'Paul Schaeflein, TravisTX'
 
 # Company or vendor of this module
-CompanyName = 'TravisTX'
+CompanyName = ''
 
 # Copyright statement for this module
 Copyright = '(c) TravisTX. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'Show contextual information about the command as you''re entering it'
+Description = 'Show contextual information about the command as you are entering it'
 
 # Minimum version of the PowerShell engine required by this module
 PowerShellVersion = '5.1'
@@ -95,13 +95,13 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @("Kubernetes", "Kubectl", "Azure", "Aws", "M365", "Terraform", "ShowOnCommand", "Show-On-Command", "Cloud")
+        Tags = @("Microsoft Graph", "Kubernetes", "Kubectl", "Azure", "Aws", "M365", "Terraform", "ShowOnCommand", "Show-On-Command", "Cloud")
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/pschaeflein/MagicTooltips/blob/main/LICENSE'
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://github.com/TravisTX/MagicTooltips'
+        ProjectUri = 'https://github.com/pschaeflein/MagicTooltips'
 
         # A URL to an icon representing this module.
         # IconUri = ''
