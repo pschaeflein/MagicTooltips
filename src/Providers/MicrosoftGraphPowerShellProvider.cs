@@ -31,15 +31,15 @@ namespace MagicTooltips.Providers
           var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".graph");
           mgCacheFilePath = Directory.EnumerateFiles(folderPath, "*cache.bin*").FirstOrDefault();
           LoggingService.WriteLog($"mgCacheFilePath: {mgCacheFilePath}");
+        }
 
-          if (!string.IsNullOrEmpty(mgCacheFilePath))
-          {
-            currentFileHash = CalculateMd5(mgCacheFilePath);
-          }
-          else
-          {
-            currentFileHash = "null";
-          }
+        if (!string.IsNullOrEmpty(mgCacheFilePath))
+        {
+          currentFileHash = CalculateMd5(mgCacheFilePath);
+        }
+        else
+        {
+          currentFileHash = "null";
         }
       }
       catch (Exception ex)
