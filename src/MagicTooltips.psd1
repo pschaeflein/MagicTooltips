@@ -95,7 +95,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @("Microsoft Graph", "Kubernetes", "Kubectl", "Azure", "Aws", "M365", "Terraform", "ShowOnCommand", "Show-On-Command", "Cloud")
+        Tags = @("Microsoft", "Graph", "Kubernetes", "Kubectl", "Azure", "Aws", "M365", "Terraform", "ShowOnCommand", "Show-On-Command", "Cloud")
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/pschaeflein/MagicTooltips/blob/main/LICENSE'
