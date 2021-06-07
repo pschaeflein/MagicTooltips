@@ -52,6 +52,7 @@ namespace MagicTooltips.Services
       var provider = ProviderFactory.GetProvider(providerKey);
       var providerSettings = (Hashtable)providerSettingsHash[providerKey];
       Settings.Providers[providerKey].Commands = GetSetting(providerSettings, "Commands", provider.DefaultCommands);
+      Settings.Providers[providerKey].NounPrefixes = GetSetting(providerSettings, "NounPrefixes", provider.DefaultNounPrefixes);
       Settings.Providers[providerKey].FgColor = GetSetting(providerSettings, "FgColor", provider.DefaultFgColor);
       Settings.Providers[providerKey].BgColor = GetSetting(providerSettings, "BgColor", provider.DefaultBgColor);
       Settings.Providers[providerKey].Template = GetSetting(providerSettings, "Template", provider.DefaultTemplate);

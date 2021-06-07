@@ -25,6 +25,7 @@ namespace MagicTooltips.Dtos
   public class ProviderSettingsDto
   {
     public string Commands { get; set; }
+    public string NounPrefixes { get; set; }
     public string FgColor { get; set; }
     public string BgColor { get; set; }
     public string Template { get; set; }

@@ -9,6 +9,7 @@ namespace MagicTooltips.Providers
   {
     public string ProviderKey => "azure";
     public string DefaultCommands => "az,terraform,pulumi,terragrunt";
+    public string DefaultNounPrefixes => null;
     public string DefaultFgColor => "#3A96DD";
     public string DefaultBgColor => "";
     public string DefaultTemplate => "\ufd03 {value}";

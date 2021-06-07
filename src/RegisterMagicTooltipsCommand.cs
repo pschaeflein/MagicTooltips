@@ -12,7 +12,7 @@ namespace MagicTooltips
       LoggingService.WriteLog("------------------------");
       LoggingService.WriteLog("Initializing");
 
-      CommandService.PopulateCommands();
+      TriggerService.PopulateTriggers();
 
       PowerShell.Create().AddCommand("Remove-PSReadlineKeyHandler")
              .AddParameter("Key", "SpaceBar")

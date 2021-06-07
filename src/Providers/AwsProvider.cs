@@ -6,6 +6,7 @@ namespace MagicTooltips.Providers
   {
     public string ProviderKey => "aws";
     public string DefaultCommands => "aws,awless,terraform,pulumi,terragrunt";
+    public string DefaultNounPrefixes => null;
     public string DefaultFgColor => "#EC7211";
     public string DefaultBgColor => "";
     public string DefaultTemplate => "\uf270 {value}";

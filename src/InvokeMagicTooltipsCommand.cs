@@ -1,5 +1,7 @@
-﻿using MagicTooltips.Services;
+﻿using MagicTooltips.Providers;
+using MagicTooltips.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using System.Threading.Tasks;
@@ -14,17 +16,45 @@ namespace MagicTooltips
 
     protected override void ProcessRecord()
     {
-      Line = Line.TrimEnd(' ');
+      Line = Line.TrimEnd(' ').ToLowerInvariant();
       LoggingService.WriteLog($"line: '{Line}'");
 
-      if (!CommandService.CommandList.ContainsKey(Line))
+      if (TriggerService.CommandList.ContainsKey(Line))
       {
-        return;
+        Invoke(TriggerService.CommandList[Line]);
       }
+      else
+      {
+        if (TriggerService.NounPrefixList.Count == 0)
+        {
+          return;
+        }
 
-      var providers = CommandService.CommandList[Line];
+        var nounsInLine = TriggerService.ParseLine(Line);
+        var nounList = string.Join(", ", nounsInLine);
+        LoggingService.WriteLog($"nounsInLine: {nounList}");
+
+        foreach (var noun in nounsInLine)
+        {
+          foreach (var prefix in TriggerService.NounPrefixList)
+          {
+            if (noun.StartsWith(prefix.Key))
+            {
+              Invoke(prefix.Value);
+            }
+
+          }
+        }
+
+        return;
+
+      }
+    }
+
+    private void Invoke(List<IProvider> providers)
+    {     
       var providerKeys = string.Join(", ", providers.Select(x => x.ProviderKey));
-      LoggingService.WriteLog($"providerKey: {providerKeys}");
+      LoggingService.WriteLog($"Invoke providerKey: {providerKeys}");
 
       Task.Run(() =>
       {

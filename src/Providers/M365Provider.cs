@@ -9,6 +9,7 @@ namespace MagicTooltips.Providers
   {
     public string ProviderKey => "m365";
     public string DefaultCommands => "m365";
+    public string DefaultNounPrefixes => null;
     public string DefaultFgColor => "#EF5350";
     public string DefaultBgColor => "";
     public string DefaultTemplate => "\uf8c5 {value}";
@@ -47,6 +48,10 @@ namespace MagicTooltips.Providers
         m365Account = PowershellInvoker.InvokeScript(script);
       }
 
+      if (m365Account == "null")
+      {
+        m365Account = "Logged out";
+      }
       return m365Account.Trim('"');
     }
 

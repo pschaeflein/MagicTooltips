@@ -5,7 +5,19 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicTooltips", "MagicTooltips.csproj", "{8FE986D6-CEB8-405F-9F3F-555C3C631966}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicTooltipsTests", "..\MagicTooltipsTests\MagicTooltipsTests.csproj", "{4ED922F3-691F-4C08-9605-CA6DB3E73759}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicTooltipsTests", "..\MagicTooltipsTests\MagicTooltipsTests.csproj", "{4ED922F3-691F-4C08-9605-CA6DB3E73759}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0DB5D91-5CC8-4701-AD0A-B5838E1B91A5}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{577D3479-F735-4166-95F5-7E62BBC952B1}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\publish.ps1 = ..\.github\workflows\publish.ps1
+		..\.github\workflows\release.yml = ..\.github\workflows\release.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +36,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{577D3479-F735-4166-95F5-7E62BBC952B1} = {B0DB5D91-5CC8-4701-AD0A-B5838E1B91A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6956E8F-8056-45A3-80B1-9B367CD03F18}

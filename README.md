@@ -5,22 +5,21 @@ A PowerShell module to display contextual information about the command you're c
 ![Magic Tooltips Demo](/media/demo.gif)
 
 Pairs nicely with custom prompts, such as [oh-my-posh](https://github.com/JanDeDobbeleer/oh-my-posh)!
-![Magic Tooltips with oh-my-posh3](/media/oh-my-posh.png)
+![Magic Tooltips with oh-my-posh3](media/oh-my-posh.png)
 
 
 Supported Providers:
+- Microsoft Graph Powershell - Shows the name of the connected account
+- M365 - Shows the name of the logged-in account for the CLI for Microsoft 365
 - Kubernetes - Shows the current kubernetes context
 - Azure - Shows the name of the current azure subscription
 - AWS - Shows the name of the selected AWS Profile (the AWS_Profile environment variable)
-- M365 - Shows the name of the logged-in account for the CLI for Microsoft 365
-- (more to come)
 
 ---
 ## Prerequisites
 - Powershell 7+
 - CLI tools installed and in your path for one or more of the supported providers
 - (optional) A [Nerd Font](https://www.nerdfonts.com/) installed and selected as your terminal's font
-  - Recommended Font: "MesloLGM Nerd Font"
 
 ---
 ## Installation
@@ -37,7 +36,7 @@ To make the module auto-load, add the Import-Module line to your [PowerShell pro
 ---
 ## Configuration
 
-MagicTooltips is configured by setting a global variables in your [PowerShell profile](#powershell-profile). Below is a sample showing all of the possible settings.
+MagicTooltips is configured by setting a global variables in your [PowerShell profile](#powershell-profile). Below is a sample showing all of the possible settings and their default values.
 
 
 ```pwsh
@@ -47,11 +46,17 @@ $global:MagicTooltipsSettings = @{
     VerticalOffset = -1
     HorizontalOffset = 0
     Providers= @{
-        Kubernetes = @{
-            Commands = "kubectl,helm,kubens,kubectx,oc,istioctl,kogito,k9s,helmfile"
-            FgColor = "#AE5FD6"
-            BgColor = ""
-            Template = "\ufd31 {value}"
+        MG = @{
+            NounPrefixes = "mg"
+            FgColor => "#32A5E6"
+            BgColor => "";
+            Template => "\uf871 {value}";
+        }
+        M365 = @{
+            Commands = "m365"
+            FgColor  = "#EF5350"
+            BgColor  = ""
+            Template = "\uf8c5 {value}"
         }
         Azure = @{
             Commands = "az,terraform,pulumi,terragrunt"
@@ -59,17 +64,17 @@ $global:MagicTooltipsSettings = @{
             BgColor = ""
             Template = "\ufd03 {value}"
         }
+        Kubernetes = @{
+            Commands = "kubectl,helm,kubens,kubectx,oc,istioctl,kogito,k9s,helmfile"
+            FgColor = "#AE5FD6"
+            BgColor = ""
+            Template = "\ufd31 {value}"
+        }
         Aws = @{
             Commands = "aws,awless,terraform,pulumi,terragrunt"
             FgColor = "#EC7211"
             BgColor = ""
             Template = "\uf270 {value}"
-        }
-        M365 = @{
-            Commands = "m365"
-            FgColor  = "#EF5350"
-            BgColor  = ""
-            Template = "\uf8c5 {value}"
         }
     }
 }
@@ -87,16 +92,16 @@ $global:MagicTooltipsSettings = @{
 }
 ```
 
-### Commands
-To configure what command will trigger MagicTooltips, edit the `Command` setting for a provider. This is a comma-separated list of commands. If you begin a line with one of these commands, the provider will activate and display a MagicTooltip.
+### Triggers
+To configure what will trigger MagicTooltips, edit the `Command` and `NounPrefixes` settings for a provider. This is a comma-separated list of values. If the entry in the terminal contains a command, or a PowerShell command begins with a specified prefix, the provider will be triggered to display a MagicTooltip.
 
 ### Colors
 To configure the colors, use hex colors in the `FgColor` and `BgColor` variables.
 
 ### Templates
-MagicTooltips are displayed using a simple template language in the `Template` variables. The string `{value}` will be replaced with the value returned by the provider (kubernetes cluster name, for example).
+MagicTooltips are displayed using a simple template language in the `Template` variables. The string `{value}` will be replaced with the value returned by the provider (Microsoft Graph connected account, for example).
 
-If you would like to use icons in your template, make sure you have a [Nerd Font](https://www.nerdfonts.com/) selected as your terminal's font. Specify icons using the syntax `` \ufd03`` where `fd03` is the hex code for the unicode character you wish to print. You can find these hex codes on the [Nerd Font Cheat Sheet](https://www.nerdfonts.com/cheat-sheet).
+If you would like to use icons in your template, make sure you have a [Nerd Font](https://www.nerdfonts.com/) selected as your terminal's font. Specify icons using the syntax ` \uf871` where `f871` is the hex code for the unicode character you wish to print. You can find these hex codes on the [Nerd Font Cheat Sheet](https://www.nerdfonts.com/cheat-sheet).
 
 ### Placement
 To configure placement, set the following variables: 
@@ -111,6 +116,8 @@ To enable debug logs, set the `Debug` variable to `$true`. The log file is calle
 ```pwsh
 (Get-Module MagicTooltips).ModuleBase
 ```
+
+(Debug logs will not work if the module is installed with the `AllUsers` scope.)
 
 ---
 ## PowerShell Profile
@@ -132,10 +139,6 @@ Once you have made changes to your profile, you can reload your profile in Power
 .$profile
 ```
 
----
-## Roadmap
-- More Providers
-    - Gcloud
 
 ---
 ## Acknowledgments
