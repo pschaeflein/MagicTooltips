@@ -15,9 +15,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{577D3479-F735-4166-95F5-7E62BBC952B1}"
 	ProjectSection(SolutionItems) = preProject
+		deploy.ps1 = deploy.ps1
+		deploy.yml = deploy.yml
 		..\.github\workflows\publish.ps1 = ..\.github\workflows\publish.ps1
 		..\.github\workflows\release.yml = ..\.github\workflows\release.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicTooltips.Logging", "..\MagicTooltips.Logging\MagicTooltips.Logging.csproj", "{82B49079-B1C0-495F-BFC3-C5EB205019B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,10 @@ Global
 		{4ED922F3-691F-4C08-9605-CA6DB3E73759}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ED922F3-691F-4C08-9605-CA6DB3E73759}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4ED922F3-691F-4C08-9605-CA6DB3E73759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82B49079-B1C0-495F-BFC3-C5EB205019B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82B49079-B1C0-495F-BFC3-C5EB205019B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82B49079-B1C0-495F-BFC3-C5EB205019B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82B49079-B1C0-495F-BFC3-C5EB205019B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

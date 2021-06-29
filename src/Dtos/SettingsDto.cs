@@ -11,6 +11,8 @@ namespace MagicTooltips.Dtos
     public int VerticalOffset { get; set; }
     public Dictionary<string, ProviderSettingsDto> Providers { get; set; }
 
+    public bool DisableTelemetry { get; set; }
+
     public SettingsDto()
     {
       Providers = new Dictionary<string, ProviderSettingsDto>();

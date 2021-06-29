@@ -17,7 +17,7 @@ namespace MagicTooltips
     protected override void ProcessRecord()
     {
       Line = Line.TrimEnd(' ').ToLowerInvariant();
-      LoggingService.WriteLog($"line: '{Line}'");
+      LoggingService.LogDebug($"line: '{Line}'");
 
       if (TriggerService.CommandList.ContainsKey(Line))
       {
@@ -32,7 +32,7 @@ namespace MagicTooltips
 
         var nounsInLine = TriggerService.ParseLine(Line);
         var nounList = string.Join(", ", nounsInLine);
-        LoggingService.WriteLog($"nounsInLine: {nounList}");
+        LoggingService.LogDebug($"nounsInLine: {nounList}");
 
         foreach (var noun in nounsInLine)
         {
@@ -42,19 +42,15 @@ namespace MagicTooltips
             {
               Invoke(prefix.Value);
             }
-
           }
         }
-
         return;
-
       }
     }
 
     private void Invoke(List<IProvider> providers)
     {     
       var providerKeys = string.Join(", ", providers.Select(x => x.ProviderKey));
-      LoggingService.WriteLog($"Invoke providerKey: {providerKeys}");
 
       Task.Run(() =>
       {
@@ -63,6 +59,7 @@ namespace MagicTooltips
 
         foreach (var provider in providers)
         {
+          LoggingService.LogOperation("Invoke", provider.ProviderKey);
           var val = provider.GetValue();
           horizontalOffset = RenderService.ShowTooltip(provider.ProviderKey, val, Host, initialY, horizontalOffset);
         }

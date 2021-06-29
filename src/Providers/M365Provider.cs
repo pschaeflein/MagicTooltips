@@ -31,12 +31,12 @@ namespace MagicTooltips.Providers
       }
       catch (Exception ex)
       {
-        LoggingService.WriteLog(ex.ToString());
+        LoggingService.LogDebug(ex.ToString());
       }
 
       if (currentFileHash != fileHash)
       {
-        LoggingService.WriteLog(".cli-m365-tokens.json has changed, clearing cache");
+        LoggingService.LogDebug(".cli-m365-tokens.json has changed, clearing cache");
         fileHash = currentFileHash;
         m365Account = null;
       }

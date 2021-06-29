@@ -24,7 +24,7 @@ namespace MagicTooltips.Services
         return;
       }
 
-      LoggingService.WriteLog($"AddTriggers {provider}");
+      LoggingService.LogDebug($"AddTriggers {provider}");
       var triggers = triggersCsv.ToLowerInvariant().Split(',');
       foreach (var trigger in triggers)
       {
@@ -34,7 +34,7 @@ namespace MagicTooltips.Services
 
     private static void AddTrigger(string trigger, string providerKey, Dictionary<string, List<IProvider>> triggerList)
     {
-      LoggingService.WriteLog($"  {trigger} -> {providerKey}");
+      LoggingService.LogDebug($"  {trigger} -> {providerKey}");
       if (!triggerList.ContainsKey(trigger))
       {
         triggerList.Add(trigger, new List<IProvider>());

@@ -29,7 +29,7 @@ namespace MagicTooltips.Services
       }
       catch (Exception ex)
       {
-        LoggingService.WriteLog($"InvokeScript: {ex.ToString()}");
+        LoggingService.LogDebug($"InvokeScript: {ex.ToString()}");
         return "";
       }
     }

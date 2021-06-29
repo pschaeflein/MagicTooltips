@@ -30,7 +30,7 @@ namespace MagicTooltips.Providers
         {
           var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".graph");
           mgCacheFilePath = Directory.EnumerateFiles(folderPath, "*cache.bin*").FirstOrDefault();
-          LoggingService.WriteLog($"mgCacheFilePath: {mgCacheFilePath}");
+          LoggingService.LogDebug($"mgCacheFilePath: {mgCacheFilePath}");
         }
 
         if (!string.IsNullOrEmpty(mgCacheFilePath))
@@ -44,17 +44,17 @@ namespace MagicTooltips.Providers
       }
       catch (Exception ex)
       {
-        LoggingService.WriteLog(ex.ToString());
+        LoggingService.LogDebug(ex.ToString());
       }
 
       if (currentFileHash == "null")
       {
-        LoggingService.WriteLog("No mgTokenCache found");
+        LoggingService.LogDebug("No mgTokenCache found");
         mgAccount = null;
       }
       if (currentFileHash != fileHash)
       {
-        LoggingService.WriteLog("mgTokenCache has changed, clearing cache");
+        LoggingService.LogDebug("mgTokenCache has changed, clearing cache");
         fileHash = currentFileHash;
         mgAccount = null;
       }

@@ -36,12 +36,12 @@ namespace MagicTooltips.Providers
       }
       catch (Exception ex)
       {
-        LoggingService.WriteLog(ex.ToString());
+        LoggingService.LogDebug(ex.ToString());
       }
 
       if (currentFileHash != fileHash)
       {
-        LoggingService.WriteLog("azureProfile.json has changed, clearing cache");
+        LoggingService.LogDebug("azureProfile.json has changed, clearing cache");
         fileHash = currentFileHash;
         azureAccount = null;
       }

@@ -31,6 +31,7 @@ namespace MagicTooltips.Services
       Settings.HorizontalAlignment = GetSetting(settingsHash, "HorizontalAlignment", HorizontalAlignmentEnum.Right);
       Settings.HorizontalOffset = GetSetting(settingsHash, "HorizontalOffset", 0);
       Settings.VerticalOffset = GetSetting(settingsHash, "VerticalOffset", -1);
+      Settings.DisableTelemetry = GetSetting(settingsHash, "DisableTelemetry", false);
 
       var providerSettingsObj = settingsHash["Providers"];
 

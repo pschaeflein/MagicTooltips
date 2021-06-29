@@ -1,0 +1,56 @@
+name: Deploy PowerShell Gallery
+
+on:
+  release:
+    types: [ published ]
+   
+env:
+  # Stop wasting time caching packages
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  # Disable sending usage data to Microsoft
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  # Project name to pack and publish
+  PROJECT_NAME: MagicTooltips
+  PS_GALLERY_KEY: ${{secrets.PS_GALLERY_KEY}}
+
+jobs:
+  deploy:
+    if: github.event_name == 'release'
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+      - name: Publish Module to PowerShell Gallery
+        run: |
+          $VERSION=($env:GITHUB_REF  -split "/" | select -skip 2).TrimStart("v")
+          echo Version: $VERSION
+
+          $distFolder = "./dist/MagicTooltips/"
+          if (Test-Path $distFolder) {
+              Remove-Item $distFolder -Recurse -Force
+          }
+          New-Item $distFolder -ItemType "directory"
+
+          Copy-Item -Path "./src/MagicTooltips.psd1" -Destination $distFolder
+          Copy-Item -Path "./src/MagicTooltips.psm1" -Destination $distFolder
+
+          dotnet build -c Release -p:Version=$VERSION -o "$($distFolder)lib/" ./src/$env:PROJECT_NAME.csproj
+
+          $manifestPath = Resolve-Path -Path "$($distFolder)$env:PROJECT_NAME.psd1"
+          Write-Host "Manifest Path: $manifestPath"
+
+          Update-ModuleManifest -ReleaseNotes $releaseNotes -Path $manifestPath.Path -ModuleVersion $VERSION #-Verbose
+
+          $moduleFilePath = Resolve-Path -Path "$($distFolder)$env:PROJECT_NAME.psm1"
+          Write-Host "Module File Path: $moduleFilePath"
+
+          try{
+            Publish-Module -Path $distFolder -NuGetApiKey $env:PS_GALLERY_KEY -ErrorAction Stop -Force
+            Write-Host "v$($VERSION) has been Published to the PowerShell Gallery!"
+          }
+          catch {
+            throw $_
+          }
