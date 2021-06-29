@@ -16,7 +16,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{577D3479-F735-4166-95F5-7E62BBC952B1}"
 	ProjectSection(SolutionItems) = preProject
 		deploy.ps1 = deploy.ps1
+		..\.github\workflows\deploy.ps1 = ..\.github\workflows\deploy.ps1
 		deploy.yml = deploy.yml
+		..\.github\workflows\deploy.yml = ..\.github\workflows\deploy.yml
 		..\.github\workflows\publish.ps1 = ..\.github\workflows\publish.ps1
 		..\.github\workflows\release.yml = ..\.github\workflows\release.yml
 	EndProjectSection
