@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicTooltips", "MagicTooltips.csproj", "{8FE986D6-CEB8-405F-9F3F-555C3C631966}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicTooltips", "MagicTooltips\MagicTooltips.csproj", "{8FE986D6-CEB8-405F-9F3F-555C3C631966}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicTooltipsTests", "..\MagicTooltipsTests\MagicTooltipsTests.csproj", "{4ED922F3-691F-4C08-9605-CA6DB3E73759}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicTooltipsTests", "MagicTooltipsTests\MagicTooltipsTests.csproj", "{4ED922F3-691F-4C08-9605-CA6DB3E73759}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0DB5D91-5CC8-4701-AD0A-B5838E1B91A5}"
 	ProjectSection(SolutionItems) = preProject
@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		..\.github\workflows\release.yml = ..\.github\workflows\release.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicTooltips.Logging", "..\MagicTooltips.Logging\MagicTooltips.Logging.csproj", "{82B49079-B1C0-495F-BFC3-C5EB205019B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicTooltips.Logging", "MagicTooltips.Logging\MagicTooltips.Logging.csproj", "{82B49079-B1C0-495F-BFC3-C5EB205019B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

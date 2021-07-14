@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\MagicTooltips.csproj" />
+    <ProjectReference Include="..\MagicTooltips\MagicTooltips.csproj" />
   </ItemGroup>
 
 </Project>
