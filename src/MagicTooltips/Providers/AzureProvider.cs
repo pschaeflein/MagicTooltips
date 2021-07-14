@@ -32,7 +32,7 @@ namespace MagicTooltips.Providers
           }
           azProfilePath = Path.Combine(azConfigDir, "azureProfile.json");
         }
-        currentFileHash = CalculateMd5(azProfilePath);
+        currentFileHash = Md5Utility.CalculateMd5(azProfilePath);
       }
       catch (Exception ex)
       {
@@ -54,18 +54,6 @@ namespace MagicTooltips.Providers
       }
 
       return azureAccount;
-    }
-
-    private static string CalculateMd5(string filePath)
-    {
-      using (var md5 = MD5.Create())
-      {
-        using (var stream = File.OpenRead(filePath))
-        {
-          var hash = md5.ComputeHash(stream);
-          return BitConverter.ToString(hash);
-        }
-      }
     }
   }
 }

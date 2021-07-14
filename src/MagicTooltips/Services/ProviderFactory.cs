@@ -30,7 +30,8 @@ namespace MagicTooltips.Services
           { ProviderKeys.Azure, new AzureProvider() },
           { ProviderKeys.Aws, new AwsProvider() },
           { ProviderKeys.M365, new M365Provider() },
-          { ProviderKeys.MicrosoftGraph, new MicrosoftGraphPowerShellProvider() }
+          { ProviderKeys.MicrosoftGraph, new MicrosoftGraphPowerShellProvider() },
+          { ProviderKeys.MGCLI, new MicrosoftGraphCLIProvider() }
         };
       }
       return AllProviders;

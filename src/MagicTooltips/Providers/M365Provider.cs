@@ -27,7 +27,7 @@ namespace MagicTooltips.Providers
         {
           m365ConnectionInfoFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".cli-m365-tokens.json");
         }
-        currentFileHash = CalculateMd5(m365ConnectionInfoFilePath);
+        currentFileHash = Md5Utility.CalculateMd5(m365ConnectionInfoFilePath);
       }
       catch (Exception ex)
       {
@@ -55,16 +55,5 @@ namespace MagicTooltips.Providers
       return m365Account.Trim('"');
     }
 
-    private static string CalculateMd5(string filePath)
-    {
-      using (var md5 = MD5.Create())
-      {
-        using (var stream = File.OpenRead(filePath))
-        {
-          var hash = md5.ComputeHash(stream);
-          return BitConverter.ToString(hash);
-        }
-      }
-    }
   }
 }

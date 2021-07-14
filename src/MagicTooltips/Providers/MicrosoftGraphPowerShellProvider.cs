@@ -35,7 +35,7 @@ namespace MagicTooltips.Providers
 
         if (!string.IsNullOrEmpty(mgCacheFilePath))
         {
-          currentFileHash = CalculateMd5(mgCacheFilePath);
+          currentFileHash = Md5Utility.CalculateMd5(mgCacheFilePath);
         }
         else
         {
@@ -72,18 +72,6 @@ namespace MagicTooltips.Providers
       else
       {
         return mgAccount.Trim('"');
-      }
-    }
-
-    private static string CalculateMd5(string filePath)
-    {
-      using (var md5 = MD5.Create())
-      {
-        using (var stream = File.OpenRead(filePath))
-        {
-          var hash = md5.ComputeHash(stream);
-          return BitConverter.ToString(hash);
-        }
       }
     }
   }
