@@ -22,7 +22,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.x
+          dotnet-version: 5.x
       - name: Publish Module to PowerShell Gallery
         run: |
           $VERSION=($env:GITHUB_REF  -split "/" | select -skip 2).TrimStart("v")
