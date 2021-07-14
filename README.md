@@ -14,6 +14,7 @@ Supported Providers:
 - Kubernetes - Shows the current kubernetes context
 - Azure - Shows the name of the current azure subscription
 - AWS - Shows the name of the selected AWS Profile (the AWS_Profile environment variable)
+- Microsoft Graph CLI (PREVIEW) - Shows the name of the connected account
 
 ---
 ## Prerequisites
