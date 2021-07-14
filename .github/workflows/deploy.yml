@@ -37,7 +37,7 @@ jobs:
           Copy-Item -Path "./src/MagicTooltips.psd1" -Destination $distFolder
           Copy-Item -Path "./src/MagicTooltips.psm1" -Destination $distFolder
 
-          dotnet build -c Release -p:Version=$VERSION -o "$($distFolder)lib/" ./src/$env:PROJECT_NAME.csproj
+          dotnet build -c Release -p:Version=$VERSION -o "$($distFolder)lib/" ./src/$env:PROJECT_NAME/$env:PROJECT_NAME.csproj
 
           $manifestPath = Resolve-Path -Path "$($distFolder)$env:PROJECT_NAME.psd1"
           Write-Host "Manifest Path: $manifestPath"
