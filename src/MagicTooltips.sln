@@ -16,10 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{577D3479-F735-4166-95F5-7E62BBC952B1}"
 	ProjectSection(SolutionItems) = preProject
-		..\.github\workflows\deploy.ps1 = ..\.github\workflows\deploy.ps1
 		..\.github\workflows\deploy.yml = ..\.github\workflows\deploy.yml
-		..\.github\workflows\publish.ps1 = ..\.github\workflows\publish.ps1
-		..\.github\workflows\release.yml = ..\.github\workflows\release.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicTooltips.Logging", "MagicTooltips.Logging\MagicTooltips.Logging.csproj", "{82B49079-B1C0-495F-BFC3-C5EB205019B7}"
