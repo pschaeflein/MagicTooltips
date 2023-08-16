@@ -38,6 +38,16 @@ namespace MagicTooltips
                         Invoke-MagicTooltips $line
                     "))
              .Invoke();
+
+      PowerShell.Create().AddCommand("Set-PSReadlineKeyHandler")
+             .AddParameter("Key", "Tab")
+             .AddParameter("ScriptBlock", ScriptBlock.Create(@"
+                        $line = $cursor = $null
+                        [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+                        Invoke-MagicTooltips $line
+                        [Microsoft.PowerShell.PSConsoleReadLine]::TabCompleteNext()
+                    "))
+             .Invoke();
     }
   }
 }
