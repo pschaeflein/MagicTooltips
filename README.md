@@ -39,6 +39,9 @@ To make the module auto-load, add the Import-Module line to your [PowerShell pro
 
 MagicTooltips is configured by setting a global variables in your [PowerShell profile](#powershell-profile). Below is a sample showing all of the possible settings and their default values.
 
+> **NOTE:** v2 Breaking change
+>
+> The Azure provider has been separated into AzCLI and AzPwsh.
 
 ```pwsh
 $global:MagicTooltipsSettings = @{
@@ -59,8 +62,14 @@ $global:MagicTooltipsSettings = @{
             BgColor  = ""
             Template = "\uf8c5 {value}"
         }
-        Azure = @{
+        AzCLI = @{
             Commands = "az,terraform,pulumi,terragrunt"
+            FgColor = "#3A96DD"
+            BgColor = ""
+            Template = "\ufd03 {value}"
+        }
+        AzPwsh = @{
+            NounPrefixes = "az"
             FgColor = "#3A96DD"
             BgColor = ""
             Template = "\ufd03 {value}"
