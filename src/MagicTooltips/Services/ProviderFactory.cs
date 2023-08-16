@@ -22,18 +22,16 @@ namespace MagicTooltips.Services
 
     public static Dictionary<string, IProvider> GetAllProviders()
     {
-      if (AllProviders == null)
-      {
-        AllProviders = new Dictionary<string, IProvider>
+      AllProviders ??= new Dictionary<string, IProvider>
           {
           { ProviderKeys.Kubernetes, new KubernetesProvider() },
-          { ProviderKeys.Azure, new AzureProvider() },
+          { ProviderKeys.AzCLI, new AzCLIProvider() },
+          { ProviderKeys.AzPwsh, new AzPowerShellProvider() },
           { ProviderKeys.Aws, new AwsProvider() },
           { ProviderKeys.M365, new M365Provider() },
           { ProviderKeys.MicrosoftGraph, new MicrosoftGraphPowerShellProvider() },
           { ProviderKeys.MGCLI, new MicrosoftGraphCLIProvider() }
         };
-      }
       return AllProviders;
     }
   }

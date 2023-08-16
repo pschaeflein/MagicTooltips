@@ -2,11 +2,12 @@
 {
   public class ProviderKeys
   {
-    public static string MGCLI = "mgcli";  // Probably merge w/PWSH. Review after release
-    public static string MicrosoftGraph = "mg";
-    public static string M365 = "m365";
-    public static string Kubernetes = "kubernetes";
-    public static string Azure = "azure";
-    public static string Aws = "aws";
+    public const string MGCLI = "mgcli";  // Probably merge w/PWSH. Review after release
+    public const string MicrosoftGraph = "mg";
+    public const string M365 = "m365";
+    public const string Kubernetes = "kubernetes";
+    public const string AzCLI = "azcli";
+    public const string AzPwsh = "azpwsh";
+    public const string Aws = "aws";
   }
 }

@@ -2,7 +2,7 @@
   "profiles": {
     "PowerShell Core": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "executablePath": "C:\\Users\\PaulSchaeflein\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe",
       "commandLineArgs": "-NoProfile -NoExit -Command \"Import-Module .\\MagicTooltips.dll; Register-MagicTooltips\""
     },
     "Windows PowerShell": {
