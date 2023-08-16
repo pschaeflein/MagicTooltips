@@ -1,9 +1,6 @@
 ﻿using MagicTooltips.Services;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 
 namespace MagicTooltips.Providers
@@ -72,10 +69,8 @@ namespace MagicTooltips.Providers
         if (File.Exists(mgRecordFilePath))
         {
           var content = File.ReadAllText(mgRecordFilePath);
-          using (var contentDoc = JsonDocument.Parse(content))
-          {
-            mgAccount = contentDoc.RootElement.GetProperty("username").GetString();
-          }
+          using var contentDoc = JsonDocument.Parse(content);
+          mgAccount = contentDoc.RootElement.GetProperty("username").GetString();
         }
       }
 

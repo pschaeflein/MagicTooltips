@@ -1,21 +1,16 @@
-﻿using Karambolo.Extensions.Logging.File;
-using Microsoft.ApplicationInsights;
+﻿using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.ApplicationInsights;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace MagicTooltips.Services
 {
-	public class LoggingService
+  public class LoggingService
 	{
 		private static string logPath = "";
-		private static object _lock = new object();
+		private static readonly object _lock = new object();
 
 		private static bool settingsDebug;
 		private static bool settingsDisabled;
@@ -53,8 +48,8 @@ namespace MagicTooltips.Services
 			if (telemetryClient == null)
 			{
 				TelemetryConfiguration config = TelemetryConfiguration.CreateDefault();
-				config.InstrumentationKey = "bf4fb923-8051-426b-a657-7255b766deb2";
-				telemetryClient = new TelemetryClient(config);
+        config.ConnectionString = "InstrumentationKey=bf4fb923-8051-426b-a657-7255b766deb2;IngestionEndpoint=https://northcentralus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://northcentralus.livediagnostics.monitor.azure.com/";
+        telemetryClient = new TelemetryClient(config);
 				telemetryClient.Context.Cloud.RoleInstance = "MagicTooltips";
 				telemetryClient.Context.Device.OperatingSystem = Environment.OSVersion.ToString();
 
@@ -66,72 +61,7 @@ namespace MagicTooltips.Services
 					{ "OperatingSystem", operatingSystem}
 				};
 			}
-
-			//			if (logger == null)
-			//			{
-			//				// Create the DI container.
-			//				IServiceCollection services = new ServiceCollection();
-
-			//				var logDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			//				if (logDir.EndsWith("lib"))
-			//				{
-			//					logDir = Directory.GetParent(logDir).ToString();
-			//				}
-
-			//				services.AddLogging(loggingBuilder =>
-			//				{
-			//					loggingBuilder.AddApplicationInsights("bf4fb923-8051-426b-a657-7255b766deb2");
-			//					loggingBuilder.AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Information);
-
-			//					loggingBuilder.AddFile(o =>
-			//					{
-			//						o.RootPath = logDir;
-			//						o.Files = new LogFileOptions[] {
-			//							new LogFileOptions{ Path=Path.Combine(logDir,"magictooltips.log")}
-			//						};
-			//					});
-
-			//#if DEBUG
-			//					debug = true;
-			//#endif
-
-			//					if (debug)
-			//					{
-			//						loggingBuilder.AddFilter<FileLoggerProvider>("", LogLevel.Debug);
-			//					}
-			//					else
-			//					{
-			//						loggingBuilder.AddFilter<FileLoggerProvider>("", LogLevel.Error);
-			//					}
-			//				});
-
-			//				// Build ServiceProvider.
-			//				IServiceProvider serviceProvider = services.BuildServiceProvider();
-
-			//				// Obtain logger instance from DI.
-			//				var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-			//				logger = loggerFactory.CreateLogger("MagicTooltips");
-
-			//				logger.LogInformation("Initialize completed");
-			//			}
 		}
-
-		//internal static void Init2()
-		//{
-		//  TelemetryConfiguration config = TelemetryConfiguration.CreateDefault();
-		//  telemetryClient = new TelemetryClient(config);
-		//  config.InstrumentationKey = "bf4fb923-8051-426b-a657-7255b766deb2";
-		//  telemetryClient.Context.Cloud.RoleInstance = "MagicTooltips";
-		//  telemetryClient.Context.Device.OperatingSystem = Environment.OSVersion.ToString();
-
-		/*
-		 * 
-
-		* 
-		 * 
-		 */
-
-		//}
 
 		public static void LogOperation(string operation, string providerKey)
 		{

@@ -14,19 +14,11 @@ namespace MagicTooltips.Services
       var tooltipText = template.Replace("{value}", value);
 
       var coloredTooltip = GetColoredString(tooltipText, providerConfiguraiton.FgColor, providerConfiguraiton.BgColor);
-
-      int drawX;
-      switch (SettingsService.Settings.HorizontalAlignment)
+      var drawX = SettingsService.Settings.HorizontalAlignment switch
       {
-        case HorizontalAlignmentEnum.Left:
-          drawX = horizontalOffset;
-          break;
-        case HorizontalAlignmentEnum.Right:
-        default:
-          drawX = Console.WindowWidth - tooltipText.Length - horizontalOffset;
-          break;
-      }
-
+        HorizontalAlignmentEnum.Left => horizontalOffset,
+        _ => Console.WindowWidth - tooltipText.Length - horizontalOffset,
+      };
       var drawY = initialY + SettingsService.Settings.VerticalOffset;
       drawY = Math.Max(0, drawY);
 

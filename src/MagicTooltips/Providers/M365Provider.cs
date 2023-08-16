@@ -1,7 +1,6 @@
 ﻿using MagicTooltips.Services;
 using System;
 using System.IO;
-using System.Security.Cryptography;
 
 namespace MagicTooltips.Providers
 {

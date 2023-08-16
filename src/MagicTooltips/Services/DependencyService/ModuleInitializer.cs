@@ -7,16 +7,7 @@ namespace MagicTooltips.Services.DependencyService
 {
   public class ModuleInitializer : IModuleAssemblyInitializer
   {
-    private static string s_binBasePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-    //private static string s_binBasePath = Path.GetFullPath(
-    //    Path.Combine(
-    //        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-    //        ".."));
-
-    //private static string s_binCommonPath = Path.Combine(s_binBasePath, "Common");
-
-    //private static string s_binCorePath = Path.Join(s_binBasePath, "Core");
-
+    private static readonly string binBasePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
     public void OnImport()
     {
@@ -35,7 +26,7 @@ namespace MagicTooltips.Services.DependencyService
       }
 
       // Now load the Engine assembly through the dependency ALC, and let it resolve further dependencies automatically
-      return DependencyAssemblyLoadContext.GetForDirectory(s_binBasePath).LoadFromAssemblyName(assemblyName);
+      return DependencyAssemblyLoadContext.GetForDirectory(binBasePath).LoadFromAssemblyName(assemblyName);
     }
 
 

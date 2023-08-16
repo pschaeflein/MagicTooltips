@@ -21,6 +21,7 @@ namespace MagicTooltips
 
       if (TriggerService.CommandList.ContainsKey(Line))
       {
+        LoggingService.LogDebug($"Command: {Line}");
         Invoke(TriggerService.CommandList[Line]);
       }
       else
@@ -31,8 +32,6 @@ namespace MagicTooltips
         }
 
         var nounsInLine = TriggerService.ParseLine(Line);
-        var nounList = string.Join(", ", nounsInLine);
-        LoggingService.LogDebug($"nounsInLine: {nounList}");
 
         foreach (var noun in nounsInLine)
         {
@@ -40,6 +39,7 @@ namespace MagicTooltips
           {
             if (noun.StartsWith(prefix.Key))
             {
+              LoggingService.LogDebug($"Noun prefix: {prefix.Key}");
               Invoke(prefix.Value);
             }
           }

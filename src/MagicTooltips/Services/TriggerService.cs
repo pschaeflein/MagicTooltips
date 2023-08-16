@@ -5,8 +5,8 @@ namespace MagicTooltips.Services
 {
   public class TriggerService
   {
-    public static Dictionary<string, List<IProvider>> CommandList = new Dictionary<string, List<IProvider>>();
-    public static Dictionary<string, List<IProvider>> NounPrefixList = new Dictionary<string, List<IProvider>>();
+    internal static readonly Dictionary<string, List<IProvider>> CommandList = new();
+    internal static readonly Dictionary<string, List<IProvider>> NounPrefixList = new();
 
     public static void PopulateTriggers()
     {
@@ -45,7 +45,7 @@ namespace MagicTooltips.Services
 
     internal static IEnumerable<string> ParseLine(string line)
     {
-      List<string> results = new List<string>();
+      List<string> results = new();
 
       var workingSet = line;
 
@@ -68,9 +68,9 @@ namespace MagicTooltips.Services
           }
           else
           {
-            string noun = null;
             workingSet = workingSet.Substring(dashPos + 1);
             var spacePos = workingSet.IndexOf(" ");
+            string noun;
             if (spacePos > 0)
             {
               noun = workingSet.Substring(0, spacePos);

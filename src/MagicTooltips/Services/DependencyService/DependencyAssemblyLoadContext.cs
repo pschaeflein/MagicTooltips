@@ -10,7 +10,7 @@ namespace MagicTooltips.Services.DependencyService
   {
     private static readonly string s_psHome = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
-    private static readonly ConcurrentDictionary<string, DependencyAssemblyLoadContext> s_dependencyLoadContexts = new ConcurrentDictionary<string, DependencyAssemblyLoadContext>();
+    private static readonly ConcurrentDictionary<string, DependencyAssemblyLoadContext> s_dependencyLoadContexts = new();
 
     internal static DependencyAssemblyLoadContext GetForDirectory(string directoryPath)
     {

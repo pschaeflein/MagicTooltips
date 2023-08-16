@@ -15,7 +15,7 @@ namespace MagicTooltips.Services
       SessionState = sessionState;
       Settings = new SettingsDto();
       var settingsObj = sessionState.PSVariable.GetValue("MagicTooltipsSettings");
-      if (!(settingsObj is Hashtable))
+      if (settingsObj is not Hashtable)
       {
         settingsObj = new Hashtable();
       }
@@ -26,16 +26,18 @@ namespace MagicTooltips.Services
 
     public static void Populate(Hashtable settingsHash)
     {
-      Settings = new SettingsDto();
-      Settings.Debug = GetSetting(settingsHash, "Debug", false);
-      Settings.HorizontalAlignment = GetSetting(settingsHash, "HorizontalAlignment", HorizontalAlignmentEnum.Right);
-      Settings.HorizontalOffset = GetSetting(settingsHash, "HorizontalOffset", 0);
-      Settings.VerticalOffset = GetSetting(settingsHash, "VerticalOffset", -1);
-      Settings.DisableTelemetry = GetSetting(settingsHash, "DisableTelemetry", false);
+      Settings = new SettingsDto
+      {
+        Debug = GetSetting(settingsHash, "Debug", false),
+        HorizontalAlignment = GetSetting(settingsHash, "HorizontalAlignment", HorizontalAlignmentEnum.Right),
+        HorizontalOffset = GetSetting(settingsHash, "HorizontalOffset", 0),
+        VerticalOffset = GetSetting(settingsHash, "VerticalOffset", -1),
+        DisableTelemetry = GetSetting(settingsHash, "DisableTelemetry", false)
+      };
 
       var providerSettingsObj = settingsHash["Providers"];
 
-      if (!(providerSettingsObj is Hashtable))
+      if (providerSettingsObj is not Hashtable)
       {
         providerSettingsObj = new Hashtable();
       }
